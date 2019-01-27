@@ -7,3 +7,6 @@ This script works by attempting to establish a TCP connection between the client
 # How do I get it to work?
 All you need to do is simply alter the configuration file to suit your needs, install Node.JS if you haven't already, and you could go ahead and run the main file.
 https://nodejs.org/en/
+
+# Contact
+Thomas#5291
