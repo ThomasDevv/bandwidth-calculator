@@ -1,6 +1,7 @@
 const { readFileSync, writeFile } = require('fs')
 const { createConnection, createServer, Socket } = require('net')
 const config = require('./config.json')
+const chalk = require('chalk')
 
 class Main {
     constructor(totalBytes) {
@@ -33,7 +34,9 @@ class Main {
                 client.connect(config.settings.port, config.settings.host, () => {
                     console.log('Successfully connected to socket.')
 
-                    this.sendData(client, 'Hello')
+                    for(const element of config.settings.messages) {
+                        this.sendData(client, element)
+                    }
                 })
 
                 setTimeout(() => resolve(), 1000)
