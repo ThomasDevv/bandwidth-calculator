@@ -1,7 +1,6 @@
 const { readFileSync, writeFile } = require('fs')
 const { createConnection, createServer, Socket } = require('net')
 const config = require('./config.json')
-const chalk = require('chalk')
 
 class Main {
     constructor(totalBytes) {
