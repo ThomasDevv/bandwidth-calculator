@@ -18,10 +18,10 @@ class Main {
     
                 sock.on('data', received => {
                     const bytes = parseInt(Buffer.byteLength(received.toString(), 'utf8'))
-                    this.totalBytes = parseInt(this.totalBytes) + bytes
+                    this.totalBytes += bytes
                     console.log(`Received the following data: ${received.toString()} with an amount of bytes of: ${bytes}`)
                     
-                    writeFile('./totalBytes.txt', parseInt(this.totalBytes), err => {
+                    writeFile('./totalBytes.txt', this.totalBytes, err => {
                         !err ? console.log('Successfully wrote to file') : console.log(err)
                     })
                 })
@@ -55,9 +55,9 @@ class Main {
         const bytes = Buffer.byteLength(data.toString(), 'utf8')
 
         config.settings.maxBytes <= bytes ? console.log('Limit has been reached. No longer capable of sending data.') : client.write(data)
-        this.totalBytes = parseInt(this.totalBytes) + parseInt(bytes)
+        this.totalBytes += parseInt(bytes)
 
-        writeFile('./totalBytes.txt', parseInt(this.totalBytes), err => {
+        writeFile('./totalBytes.txt', this.totalBytes, err => {
             !err ? console.log('Successfully wrote to file') : console.log(err)
         })
 
@@ -66,6 +66,6 @@ class Main {
 }
 
 const bytes = readFileSync('./totalBytes.txt', 'utf8')
-const obj = new Main(bytes)
+const obj = new Main(parseInt(bytes))
 
 obj.handleReceivedData().then(() => console.log('Done.'))
