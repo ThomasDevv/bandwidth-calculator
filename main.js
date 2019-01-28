@@ -47,7 +47,8 @@ class Main {
     }
     /*
       Sends the passed data over the socket.
-
+      
+      @param ${object} client
       @param ${string} data
     */
 
