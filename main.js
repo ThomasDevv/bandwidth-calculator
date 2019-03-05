@@ -54,7 +54,8 @@ class Main {
     sendData(client, data) {
         const bytes = Buffer.byteLength(data.toString(), 'utf8')
 
-        config.settings.maxBytes <= bytes ? console.log('Limit has been reached. No longer capable of sending data.') : client.write(data)
+        if(config.settings.maxBytes <= bytes) return console.log('Limit has been reached. No longer capable of sending data.')
+        else client.write(data)
         this.totalBytes += parseInt(bytes)
 
         writeFile('./totalBytes.txt', this.totalBytes, err => {
